@@ -20,5 +20,4 @@ deploy:  # Our deployment environment settings. Which coming from AWS.
   on:
     branch: master  # We are specifying the branch name.It means whenever master has a new version than deploy the latest version!
   access_key_id: $AWS_ACCESS_KEY   # We have set this value as a environment variable in travis ci.
-  secret_access_key:
-    secure: "$AWS_SECRET_KEY"    # We have set this value as a environment variable in travis ci. Use environment variable names.
+  secret_access_key: $AWS_SECRET_KEY    # We have set this value as a environment variable in travis ci. Use environment variable names.
