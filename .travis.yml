@@ -1,0 +1,10 @@
+language: generic
+sudo: required  # Specifying we will need root permissions in the system.
+services:
+  - docker  # We need docker service.
+
+before_install:  # Commands that should be run before run our test suits.
+  - docker build -t alidurgun/docker-CI-CD -f Dockerfile.dev .
+
+script:  # series of commands that should be run in order to execute our test suit.
+  - docker run -e CI=true alidurgun/docker-CI-CD npm run test
