@@ -8,3 +8,17 @@ before_install:  # Commands that should be run before run our test suits.
 
 script:  # series of commands that should be run in order to execute our test suit.
   - docker run -e CI=true testcontainer npm run test
+
+
+deploy:  # Our deployment environment settings. Which coming from AWS.
+  provider: elasticbeanstalk
+  region: "eu-central-1"
+  app: "docker-react-CI-CD"
+  env: "Dockerreactcicd-env"
+  bucket_name: "elasticbeanstalk-eu-central-1-941404613840" # Specify where to copy project zip file in the AWS. It's generated automatically at the AWS side. Just go and search for S3 keyword in the AWS. Then copy the name of the S3 bucket.
+  bucket_path: "docker-react-CI-CD"  # Folder that should be contained our zip file. It should be same name with the app:
+  on:
+    branch: master  # We are specifying the branch name.It means whenever master has a new version than deploy the latest version!
+  access_key_id: $AWS_ACCESS_KEY   # We have set this value as a environment variable in travis ci.
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"    # We have set this value as a environment variable in travis ci. Use environment variable names.
